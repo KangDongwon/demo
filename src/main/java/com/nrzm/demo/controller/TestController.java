@@ -1,6 +1,7 @@
 package com.nrzm.demo.controller;
 
 import com.nrzm.demo.dto.TestDTO;
+import com.nrzm.demo.entity.Item;
 import com.nrzm.demo.service.ItemService;
 import com.nrzm.demo.dto.ItemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,11 @@ public class TestController {
             ItemDTO itemDTO = itemService.getItemDTObyId(id);
             return ResponseEntity.ok(itemDTO);
         } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            //return ResponseEntity.notFound().build();
+            ItemDTO itemDTO = new ItemDTO();
+            itemDTO.setItemId(1L);
+            itemDTO.setItemName("깅치찌개");
+            return ResponseEntity.ok(itemDTO);
         }
     }
 

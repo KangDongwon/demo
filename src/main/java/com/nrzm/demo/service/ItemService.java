@@ -16,7 +16,7 @@ public class ItemService {
 
     @Transactional(readOnly = true)
     public Item getItemById(Long id) {
-        return itemRepository.findByItemId(id).orElse(null);
+        return itemRepository.findById(id).orElse(null);
     }
 
     @Transactional(readOnly = true)
