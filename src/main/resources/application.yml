@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: demo
+  datasource:
+    url: jdbc:h2:mem:testdb
+    # url : jdbc:h2:file./data/testdb # 파일 기반 H2 데이터베이스 사용(데이터 유지)
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: '1234'
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+
+# 주석 처리된 파일 기반 H2 데이터베이스 설정
+# spring:
+#   datasource:
+#     url: jdbc:h2:file:./data/testdb
+
+# 추가 설명:
+# spring.sql.init.mode 옵션:
+# always: 항상 초기화 스크립트 실행
+# embedded: 내장 데이터베이스일 때만 초기화 스크립트 실행
+# never: 초기화 스크립트를 실행하지 않음
+# 기본 설정은 embedded이며, never로 설정하면 초기화되지 않음

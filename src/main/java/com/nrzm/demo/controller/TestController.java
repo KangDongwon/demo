@@ -1,29 +1,40 @@
-package com.nrzm.demo;
+package com.nrzm.demo.controller;
 
 import com.nrzm.demo.dto.TestDTO;
+import com.nrzm.demo.service.ItemService;
+import com.nrzm.demo.dto.ItemDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
 public class TestController {
+    @Autowired
+    private ItemService itemService;
+
+    @GetMapping("/hello4/{id}")
+    public ResponseEntity<ItemDTO> getItem(@PathVariable Long id) {
+        try{
+            ItemDTO itemDTO = itemService.getItemDTObyId(id);
+            return ResponseEntity.ok(itemDTO);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
    @GetMapping
     public ResponseEntity<List<Object>> hello() {
        List<Object> tmpList = new ArrayList<>();
 
-       tmpList.add("안녕1");
-       tmpList.add("안녕2");
-       tmpList.add("안녕3");
-       tmpList.add("안녕4");
+       //tmpList.add("안녕1");
+       //tmpList.add("안녕2");
+       //tmpList.add("안녕3");
+       //tmpList.add("안녕4");
 
 //       Map<String, String> tmpMap = new HashMap<>();
 //       tmpMap.put("title", "제목");
@@ -40,7 +51,6 @@ public class TestController {
 
 //       tmpList.add(mapList);
        tmpList.add(dtoList);
-
        return ResponseEntity.ok(tmpList);
     }
 
